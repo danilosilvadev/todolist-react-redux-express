@@ -4,27 +4,24 @@ class List extends Component {
   constructor() {
     super()
     this.state = {
-      list: [
-        {
-          done: false,
-          name: 'Teminar de Lavar a Louça'
-        },
-        {
-          done: false,
-          name: 'Fazer a POI no Tibia'
-        },
-        {
-          done: true,
-          name: 'Jogar lixo para fora'
-        },
-        {
-          done: true,
-          name: 'Teminar de estudar Redux'
-        }
-      ],
-
+      list: [],
       checked: true
     }
+  }
+
+  componentDidMount() {
+    fetch('/teste')
+      .then(response => {
+        return response.json()
+      })
+      .then(response => {
+        this.setState({
+          list: response
+        })
+      })
+      .catch(err => {
+        console.log(err);
+      })
   }
 
   controlCheckbox() {
